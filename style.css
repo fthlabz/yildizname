@@ -4,7 +4,7 @@
     --gold: #d4af37;
     --text: #d0d0d0;
     --font-head: 'Cinzel', serif;
-    --font-body: 'Crimson Text', serif; /* Kitap gibi okunsun diye */
+    --font-body: 'Crimson Text', serif;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; /* Mobilde klavye açılınca sorun olmasın diye */
     padding: 20px 0;
     background-image: radial-gradient(circle at top, #1a1a1a, #000);
 }
@@ -28,52 +28,92 @@ body {
     animation: twinkle 5s infinite alternate;
 }
 
-.container { width: 100%; max-width: 750px; padding: 15px; }
+.container { width: 100%; max-width: 600px; padding: 15px; } /* Genişliği biraz daralttım */
 
 .screen { display: none; opacity: 0; transition: opacity 0.8s; }
 .screen.active { display: block; opacity: 1; }
 
-header { text-align: center; margin: 40px 0; }
-.logo { font-size: 4rem; color: var(--gold); margin-bottom: 15px; text-shadow: 0 0 20px rgba(212,175,55,0.4); animation: float 3s ease-in-out infinite; }
-h1 { font-family: var(--font-head); color: var(--gold); margin: 0; font-size: 2rem; letter-spacing: 2px; }
-p { color: #888; font-size: 1.1rem; margin-top: 10px; font-style: italic; }
+/* HEADER - LOGO KISMI */
+header { text-align: center; margin: 30px 0; }
+.logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 10px; text-shadow: 0 0 15px rgba(212,175,55,0.4); animation: float 3s ease-in-out infinite; }
+h1 { font-family: var(--font-head); color: var(--gold); margin: 0; font-size: 1.8rem; letter-spacing: 2px; }
+p { color: #777; font-size: 0.9rem; margin-top: 8px; font-style: italic; }
 
-.form-group { margin-bottom: 30px; }
-label { display: block; color: var(--gold); font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px; font-family: var(--font-head); }
-input { 
-    width: 100%; padding: 15px; background: rgba(255,255,255,0.05); 
-    border: 1px solid #333; color: #fff; font-size: 1.3rem; outline: none; transition: 0.3s;
-    font-family: var(--font-head); border-radius: 5px;
+/* FORM ALANI - ARTIK KİBAR */
+.form-group { margin-bottom: 20px; }
+
+label { 
+    display: block; 
+    color: var(--gold); 
+    font-size: 0.8rem; 
+    margin-bottom: 6px; 
+    letter-spacing: 1px; 
+    font-family: var(--font-head); 
+    opacity: 0.8;
 }
-input:focus { border-color: var(--gold); background: rgba(212,175,55,0.05); }
 
+input { 
+    width: 100%; 
+    padding: 10px 12px; /* DÜZELTİLDİ: Yükseklik azaltıldı */
+    height: 42px;       /* DÜZELTİLDİ: Sabit, ince yükseklik */
+    background: rgba(255,255,255,0.03); /* Daha şeffaf */
+    border: 1px solid #333; 
+    color: #fff; 
+    font-size: 1rem;    /* DÜZELTİLDİ: Yazı boyutu küçültüldü */
+    outline: none; 
+    transition: 0.3s;
+    font-family: var(--font-head); 
+    border-radius: 4px;
+    box-sizing: border-box; /* Taşmayı engeller */
+}
+
+input:focus { 
+    border-color: var(--gold); 
+    background: rgba(212,175,55,0.05); 
+}
+
+/* BUTON - DAHA ZARİF */
 .magic-btn {
-    width: 100%; padding: 20px; background: linear-gradient(135deg, #8a6e34, #c5a059);
-    border: none; color: #000; font-family: var(--font-head); font-weight: bold; 
-    font-size: 1.2rem; cursor: pointer; margin-top: 20px; display: flex; 
-    justify-content: center; gap: 15px; align-items: center; box-shadow: 0 5px 25px rgba(212,175,55,0.3);
-    border-radius: 5px; transition: 0.3s;
+    width: 100%; 
+    padding: 15px; 
+    background: linear-gradient(135deg, #8a6e34, #c5a059);
+    border: none; 
+    color: #000; 
+    font-family: var(--font-head); 
+    font-weight: bold; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    margin-top: 15px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+    align-items: center; 
+    box-shadow: 0 5px 15px rgba(212,175,55,0.2);
+    border-radius: 4px; 
+    transition: 0.3s;
 }
 .magic-btn:active { transform: scale(0.98); }
 
-#screen-loading { text-align: center; padding-top: 100px; }
+/* YÜKLENİYOR */
+#screen-loading { text-align: center; padding-top: 80px; }
 .pulse-loader {
-    width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--gold);
-    margin: 0 auto 20px; animation: spin 2s infinite linear;
+    width: 60px; height: 60px; border-radius: 50%; border: 1px solid var(--gold);
+    margin: 0 auto 20px; animation: spin 2s infinite linear; box-shadow: 0 0 15px var(--gold);
 }
-.fade-text { color: #666; font-style: italic; margin-top: 10px; }
+.fade-text { color: #666; font-style: italic; margin-top: 10px; font-size: 0.9rem; }
 
-.result-card { background: var(--card); border: 1px solid #333; padding: 0; margin-bottom: 50px; box-shadow: 0 0 50px rgba(0,0,0,0.8); border-radius: 8px; overflow: hidden; }
+/* SONUÇ KARTI */
+.result-card { background: var(--card); border: 1px solid #333; padding: 0; margin-bottom: 50px; box-shadow: 0 0 40px rgba(0,0,0,0.7); border-radius: 6px; overflow: hidden; }
 .card-header { 
-    padding: 40px 20px; text-align: center; border-bottom: 3px double var(--gold); 
+    padding: 30px 20px; text-align: center; border-bottom: 2px solid var(--gold); 
     background: #111;
 }
-.card-header h2 { color: #fff; margin: 0; font-family: var(--font-head); font-size: 2.2rem; letter-spacing: 3px; }
-.badges { margin-top: 15px; display: flex; justify-content: center; gap: 20px; color: var(--gold); font-family: var(--font-head); font-size: 0.9rem; }
+.card-header h2 { color: #fff; margin: 0; font-family: var(--font-head); font-size: 1.8rem; letter-spacing: 2px; }
+.badges { margin-top: 10px; display: flex; justify-content: center; gap: 15px; color: var(--gold); font-family: var(--font-head); font-size: 0.8rem; }
 
-/* DETAYLI MADDELER */
+/* MADDELER */
 .detail-item {
-    padding: 30px;
+    padding: 25px;
     border-bottom: 1px solid #222;
     transition: background 0.3s;
     animation: slideUp 0.5s ease forwards;
@@ -83,17 +123,17 @@ input:focus { border-color: var(--gold); background: rgba(212,175,55,0.05); }
 .detail-item:hover { background: rgba(255,255,255,0.02); }
 
 .detail-title {
-    color: var(--gold); font-family: var(--font-head); font-size: 1.3rem; 
-    margin-bottom: 15px; display: flex; align-items: center; gap: 15px;
-    border-bottom: 1px dashed #333; padding-bottom: 10px;
+    color: var(--gold); font-family: var(--font-head); font-size: 1.1rem; 
+    margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px dashed #333; padding-bottom: 8px;
 }
 .detail-text { 
-    font-size: 1.2rem; line-height: 1.8; color: #ccc; text-align: justify; 
+    font-size: 1.05rem; line-height: 1.7; color: #ccc; text-align: justify; 
     font-weight: 300;
 }
 .highlight { color: #fff; font-weight: 600; }
 
-.retry-btn { width: 100%; padding: 25px; background: #111; border: none; color: #666; cursor: pointer; font-family: var(--font-head); font-size: 1rem; border-top: 1px solid #333; }
+.retry-btn { width: 100%; padding: 20px; background: #111; border: none; color: #666; cursor: pointer; font-family: var(--font-head); font-size: 0.9rem; border-top: 1px solid #333; transition:0.3s; }
 .retry-btn:hover { color: var(--gold); background: #161616; }
 
 @keyframes spin { 100% { transform: rotate(360deg); } }
