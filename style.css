@@ -1,3 +1,10 @@
+/* --- TEMEL AYARLAR (TAŞMAYI ENGELLEYEN KOD) --- */
+* {
+    box-sizing: border-box; /* Bu kod kutuların taşmasını engeller */
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --bg: #050505;
     --card: #0f0f0f;
@@ -15,9 +22,10 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Mobilde klavye açılınca sorun olmasın diye */
-    padding: 20px 0;
+    align-items: flex-start; /* Mobilde yukarı yaslansın */
+    padding: 20px 10px; /* Yanlardan boşluk bırak */
     background-image: radial-gradient(circle at top, #1a1a1a, #000);
+    overflow-x: hidden;
 }
 
 /* Hareketli Arka Plan */
@@ -28,7 +36,13 @@ body {
     animation: twinkle 5s infinite alternate;
 }
 
-.container { width: 100%; max-width: 350px; padding: 15px; } /* Genişliği biraz daralttım */
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+}
 
 .screen { display: none; opacity: 0; transition: opacity 0.8s; }
 .screen.active { display: block; opacity: 1; }
@@ -39,28 +53,37 @@ header { text-align: center; margin: 30px 0; }
 h1 { font-family: var(--font-head); color: var(--gold); margin: 0; font-size: 1.8rem; letter-spacing: 2px; }
 p { color: #777; font-size: 0.9rem; margin-top: 8px; font-style: italic; }
 
-/* FORM ALANI - ARTIK KİBAR */
-.form-group { margin-bottom: 20px; }
+/* --- FORM ALANI (VE DARALTMA AYARI) --- */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Kutuları ortalar */
+}
 
 label { 
     display: block; 
+    width: 100%;
+    max-width: 350px; /* Label da kutuyla aynı hizada dursun */
     color: var(--gold); 
     font-size: 0.8rem; 
     margin-bottom: 6px; 
     letter-spacing: 1px; 
     font-family: var(--font-head); 
     opacity: 0.8;
+    text-align: left;
 }
 
+/* GİRİŞ KUTULARI (HEPSİ İÇİN GEÇERLİ) */
 input { 
-    width: 100%;
-    max-width:350px;
-    padding: 10px 12px; /* DÜZELTİLDİ: Yükseklik azaltıldı */
-    height: 42px;       /* DÜZELTİLDİ: Sabit, ince yükseklik */
-    background: rgba(255,255,255,0.03); /* Daha şeffaf */
+    width: 100%; 
+    max-width: 350px; /* !!! İŞTE DARALTAN KOD BU !!! */
+    padding: 10px 12px;
+    height: 45px;       
+    background: rgba(255,255,255,0.03); 
     border: 1px solid #333; 
     color: #fff; 
-    font-size: 1rem;    /* DÜZELTİLDİ: Yazı boyutu küçültüldü */
+    font-size: 1rem;    
     outline: none; 
     transition: 0.3s;
     font-family: var(--font-head); 
@@ -73,9 +96,10 @@ input:focus {
     background: rgba(212,175,55,0.05); 
 }
 
-/* BUTON - DAHA ZARİF */
+/* BUTON */
 .magic-btn {
     width: 100%; 
+    max-width: 350px; /* Buton da aynı genişlikte olsun */
     padding: 15px; 
     background: linear-gradient(135deg, #8a6e34, #c5a059);
     border: none; 
@@ -141,5 +165,3 @@ input:focus {
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 @keyframes twinkle { from { opacity: 0.2; } to { opacity: 0.4; } }
 @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-
